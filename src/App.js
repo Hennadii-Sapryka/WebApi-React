@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+
 import { useMemo } from "react";
 import {Map} from './Map/Map.jsx';
 import { ApiConfig } from './api/serviceApi';
-import  {Electrician} from './pages/Electrician';
+import  {Electrician} from './pages/Electrician.jsx';
 
 function App() {
 
@@ -24,8 +25,6 @@ function App() {
   return (
     <div className="App">  
       <header className="App-header">
-      
-       
         {isLoaded ? <Map /> : <h3>Loading...</h3>}
       </header>
       <Electrician></Electrician>
