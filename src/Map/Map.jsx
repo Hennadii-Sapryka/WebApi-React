@@ -1,13 +1,16 @@
 
 import { useState, useCallback } from 'react';
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import {Header } from '../Header/Header'
+import  GoogleMapReact from 'google-map-react';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import  InputLabel  from '@mui/material/InputLabel/InputLabel';
-import  InputAdornment  from '@mui/material/InputAdornment/InputAdornment.js';
-import  TextField  from '@mui/material/TextField/TextField';
+import InputLabel from '@mui/material/InputLabel/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment/InputAdornment.js';
+import TextField from '@mui/material/TextField/TextField';
+
 
 const containerStyle = {
     width: '80vh',
@@ -19,7 +22,23 @@ const center = {
     lng: 46.70095
 };
 
-export  const Map = () => {
+
+let shops = [
+    {
+        id: '1',
+        name: 'LA SHOP',
+        latitude: 24.676944035701325,
+        longitude: 46.71918631636369
+    },
+    {
+        id: '2',
+        name: '5 Riyal Shop',
+        latitude: 24.579993726546757,
+        longitude: 46.77123534397916
+    }
+]
+
+export const Map = () => {
     const onLoad = useCallback((map) => {
         const bounds = new window.google.maps.LatLngBounds(center);
         map.fitBounds(bounds);
@@ -31,39 +50,24 @@ export  const Map = () => {
     }, []);
 
     const [map, setMap] = useState(null);
-
-    const header = () => (
-        <div style={{ backgroundColor: "pink" }}>
-            <Typography variant='h4'>
-                U S E R S
-            </Typography>
-            <TextField label='Search for...' variant='outlined'/>
-            <div
-                style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignContent:'center', padding: '5px 40px 5px 5px' }}>
-                <Typography >Dictance</Typography>
-                <Slider style={{ width: '75%' }}></Slider>
-            </div>
-            <div>
-                <Button variant='outlined'>Resset</Button>
-                <Button variant='contained'>Search</Button>
-            </div>
-        </div>);
-
+    var state = false;
 
     return (
         <div>
-            {header()}
-            <div style={{ backgroundColor: "cyan" }}>
-                <GoogleMap
+
+            
+            <div style={{ backgroundColor: "cyan", height:'800px', width:'500px' }}>
+                <GoogleMapReact
                     mapContainerStyle={containerStyle}
                     center={center}
                     zoom={10}
+                    onClick={() => console.log('click')}
                 >
                     <Marker
                         position={center}
-                        icon={"http://maps.google.com/mapfiles/ms/icons/green-dot.png"} />
-                    <></>
-                </GoogleMap>
+                        icon={"http://maps.google.com/mapfiles/ms/icons/green-dot.png"}>
+                    </Marker>
+                </GoogleMapReact>
             </div>
         </div>
 
