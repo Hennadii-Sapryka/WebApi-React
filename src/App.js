@@ -5,9 +5,9 @@ import { Marker, useLoadScript } from "@react-google-maps/api";
 import { Map } from './Map/Map.jsx';
 import { ApiConfig } from './api/serviceApi';
 import { Electrician } from './pages/Electrician.jsx';
-import { MyHeader } from './Header/MyHeader.tsx';
-import { MyMap } from './Map/MyMap.tsx';
-import { List } from './List/List.tsx';
+import { MyHeader } from './Header/MyHeader.jsx';
+import { MyMap } from './Map/MyMap.jsx';
+import { List } from './List/List.jsx';
 import { CssBaseLine, Grid } from '@material-ui/core/';
 import  {getPlacesData}  from './api/index.js';
 
@@ -20,6 +20,7 @@ function App() {
   const [places, setPlaces] = useState([]); 
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState({});
+  const [type, setType] = useState('restaurant');
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyC_xxE0PCh6jr1dn4M1RFcRA5hLs6urffg"
@@ -34,13 +35,11 @@ function App() {
   }, []) */
 
   useEffect(() => {
-    console.log(coordinates, bounds);
-    getPlacesData(bounds.sw, bounds.ne) //recive restourants
-    .then((data) => {
-      console.log(data); 
+    getPlacesData(type, bounds.sw, bounds.ne) //recive restourants
+    .then((data) => { 
       setPlaces(data); 
     })
-  }, [coordinates, bounds]);
+  }, [type, coordinates, bounds]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -56,6 +55,8 @@ function App() {
           <Grid item xs={12} md={4}>
             <List 
             places={places}
+            type={type}
+            setType={setType}
              />
           </Grid>
           <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

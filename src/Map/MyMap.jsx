@@ -25,6 +25,7 @@ export const MyMap = ({  places, setCoordinates, coordinates, setBounds, setChil
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
+        onChildClick={(e)=>{console.log(e)}}
       >
          {places?.map((place, i) => (
           <div
