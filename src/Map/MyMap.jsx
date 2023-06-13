@@ -8,7 +8,7 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles.js';
 
-export const MyMap = ({  places, setCoordinates, coordinates, setBounds, setChildClicked }) => {
+export const MyMap = ({ places, setCoordinates, coordinates, setBounds, setChildClicked }) => {
   const matches = useMediaQuery('(min-width:600px)');
   const classes = useStyles();
 
@@ -25,7 +25,7 @@ export const MyMap = ({  places, setCoordinates, coordinates, setBounds, setChil
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        onChildClick={(e)=>{console.log(e)}}
+        onChildClick={(child)=>setChildClicked(child)}
       >
          {places?.map((place, i) => (
           <div

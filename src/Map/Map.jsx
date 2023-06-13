@@ -22,22 +22,6 @@ const center = {
     lng: 46.70095
 };
 
-
-let shops = [
-    {
-        id: '1',
-        name: 'LA SHOP',
-        latitude: 24.676944035701325,
-        longitude: 46.71918631636369
-    },
-    {
-        id: '2',
-        name: '5 Riyal Shop',
-        latitude: 24.579993726546757,
-        longitude: 46.77123534397916
-    }
-]
-
 export const Map = () => {
     const onLoad = useCallback((map) => {
         const bounds = new window.google.maps.LatLngBounds(center);
